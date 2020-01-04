@@ -72,6 +72,10 @@
 			<artifactId>jsp-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<!-- <dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+		</dependency> -->
 		<!-- 引入dubbo相关依赖包 -->
 		<!-- dubbo相关 -->
 		<dependency>

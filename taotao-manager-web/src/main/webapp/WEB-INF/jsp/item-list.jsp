@@ -31,7 +31,7 @@
     	ids = ids.join(",");
     	return ids;
     }
-    
+    //工具栏的定义
     var toolbar = [{
         text:'新增',
         iconCls:'icon-add',
