@@ -101,6 +101,10 @@
 			<groupId>com.github.sgroschupf</groupId>
 			<artifactId>zkclient</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.github.tobato</groupId>
+			<artifactId>fastdfs-client</artifactId>
+		</dependency>		
 	</dependencies>
 	<!-- 打包构建时使用的插件 -->
 	<build>

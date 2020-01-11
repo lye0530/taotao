@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.taotao.common.pojo.DataResult;
@@ -39,7 +40,7 @@ public class ItemController {
 	 * @return
 	 */
 	@RequestMapping(value = "/item/list",method = RequestMethod.GET)
-	public DataResult<TbItem> getAllItem(Integer page,Integer rows) {
+	public DataResult<TbItem> getAllItem(@RequestParam("page")Integer page,@RequestParam("rows")Integer rows) {
 		return itemService.getAllItem(page, rows);
 	}
 }

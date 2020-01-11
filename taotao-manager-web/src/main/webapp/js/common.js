@@ -104,28 +104,34 @@ var TT = TAOTAO = {
     
     // 初始化选择类目组件
     initItemCat : function(data){
+    	//使用each循环的原因：把当前html标注selectItemCat的节点做统一处理
     	$(".selectItemCat").each(function(i,e){
+    		//i是循环的下标，e循环的当前对象
+    		//将其循环的DOM对象转换为jquery对象
     		var _ele = $(e);
     		if(data && data.cid){
     			_ele.after("<span style='margin-left:10px;'>"+data.cid+"</span>");
     		}else{
     			_ele.after("<span style='margin-left:10px;'></span>");
     		}
+    		//unbind方法：如果jquery对象之前有绑定点击事件，先解绑
     		_ele.unbind('click').click(function(){
     			$("<div>").css({padding:"5px"}).html("<ul>")
     			.window({
     				width:'500',
     			    height:"450",
-    			    modal:true,
+    			    modal:true,//模态参考百度
     			    closed:true,
     			    iconCls:'icon-save',
     			    title:'选择类目',
+    			    //当打开窗口时做一件事
     			    onOpen : function(){
     			    	var _win = this;
     			    	$("ul",_win).tree({
     			    		url:'/item/cat/list',
     			    		animate:true,
     			    		onClick : function(node){
+    			    			//当点击树形控件的时候，判断是否点击的是叶子节点
     			    			if($(this).tree("isLeaf",node.target)){
     			    				// 填写到cid中
     			    				_ele.parent().find("[name=cid]").val(node.id);
