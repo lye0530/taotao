@@ -13,6 +13,11 @@ import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemExample;
 //import com.taotao.pojo.TbItemExample.Criteria;
 
+/**
+ * 测试PageHelper
+ * @author MLOONG
+ *
+ */
 public class TestPageHelper {
 	
 	@Test

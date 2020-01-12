@@ -1,6 +1,7 @@
 package com.taotao.service;
 
 import com.taotao.common.pojo.DataResult;
+import com.taotao.common.pojo.TaoTaoResult;
 import com.taotao.pojo.TbItem;
 
 public interface ItemService {
@@ -18,4 +19,12 @@ public interface ItemService {
 	 * @return
 	 */
 	public DataResult<TbItem> getAllItem(int page,int rows);
+	
+	/**
+	 * 添加商品信息
+	 * @param item 商品信息实体对象
+	 * @param desc 描述
+	 * @return
+	 */
+	public TaoTaoResult addItem(TbItem item,String desc);
 }

@@ -72,10 +72,8 @@
 			<artifactId>jsp-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<!-- <dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper</artifactId>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.github.pagehelper</groupId> <artifactId>pagehelper</artifactId> 
+			</dependency> -->
 		<!-- 引入dubbo相关依赖包 -->
 		<!-- dubbo相关 -->
 		<dependency>
@@ -101,10 +99,19 @@
 			<groupId>com.github.sgroschupf</groupId>
 			<artifactId>zkclient</artifactId>
 		</dependency>
+		<!-- <dependency> <groupId>com.github.tobato</groupId> <artifactId>fastdfs-client</artifactId> 
+			</dependency> -->
+		<!-- 添加FastDFS客户端的引用 -->
 		<dependency>
-			<groupId>com.github.tobato</groupId>
-			<artifactId>fastdfs-client</artifactId>
-		</dependency>		
+			<groupId>fastdfs_client</groupId>
+			<artifactId>fastdfs_client</artifactId>
+			<version>1.25</version>
+		</dependency>
+		<!-- 文件上传组件 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
 	</dependencies>
 	<!-- 打包构建时使用的插件 -->
 	<build>

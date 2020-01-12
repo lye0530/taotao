@@ -3,18 +3,23 @@ package com.taotao.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 商品描述表对应实体
+ * @author MLOONG
+ *
+ */
 public class TbItemDesc implements Serializable{
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = -3369180805974144058L;
-
+	//商品ID
 	private Long itemId;
-
+	//商品描述
     private Date created;
-
+    //创建时间
     private Date updated;
-
+    //更新时间
     private String itemDesc;
 
     public Long getItemId() {

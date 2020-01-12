@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * 页面展示controller
+ * 页面展示控制器
  * @author MLOONG
  *
  */

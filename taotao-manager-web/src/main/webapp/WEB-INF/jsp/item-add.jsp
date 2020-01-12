@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- kindeditor富文本编辑器的样式 -->
 <link href="/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
+<!-- kindeditor富文本编辑器的js脚本，经过压缩和加密的 -->
 <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+<!-- kindeditor富文本编辑器的语言环境js脚本 -->
 <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <div style="padding:10px 10px 10px 10px">
 	<form id="itemAddForm" class="itemForm" method="post">
@@ -46,6 +49,7 @@
 	        <tr>
 	            <td>商品描述:</td>
 	            <td>
+	            	<!-- kindeditor富文本编辑器的一个初始化控件，需要原生的html(textarea)作为载体，实际展示时不显示，时隐藏的，富文本编辑器的内容数据会放在这个html标签中 -->
 	                <textarea style="width:800px;height:300px;visibility:hidden;" name="desc"></textarea>
 	            </td>
 	        </tr>
@@ -67,7 +71,7 @@
 	var itemAddEditor ;
 	//页面初始化完毕后执行此方法
 	$(function(){
-		//创建富文本编辑器
+		//创建富文本编辑器,选择id为itemAddForm的表单中name=desc的控件标签
 		itemAddEditor = TAOTAO.createEditor("#itemAddForm [name=desc]");
 		//初始化类目选择和图片上传器
 		TAOTAO.init({fun:function(node){
@@ -84,7 +88,7 @@
 		}
 		//取商品价格，单位为“分”
 		$("#itemAddForm [name=price]").val(eval($("#itemAddForm [name=priceView]").val()) * 100);
-		//同步文本框中的商品描述
+		//同步文本框中的商品描述(提交前先同步富文本编辑器的内容)
 		itemAddEditor.sync();
 		//取商品的规格
 		/*
@@ -109,6 +113,8 @@
 		paramJson = JSON.stringify(paramJson);
 		$("#itemAddForm [name=itemParams]").val(paramJson);
 		*/
+		//用于测试，打印表单序列化的内容
+		alert($("#itemAddForm").serialize());
 		//ajax的post方式提交表单
 		//$("#itemAddForm").serialize()将表单序列号为key-value形式的字符串
 		$.post("/item/save",$("#itemAddForm").serialize(), function(data){
