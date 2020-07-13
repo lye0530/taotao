@@ -87,6 +87,7 @@ var TT = TAOTAO = {
         		KindEditor.editor(TT.kingEditorParams).loadPlugin('multiimage',function(){
         			var editor = this;
         			editor.plugin.multiImageDialog({
+        				//获取上传成功的图片url列表信息
 						clickFn : function(urlList) {
 							var imgArray = [];
 							KindEditor.each(urlList, function(i, data) {

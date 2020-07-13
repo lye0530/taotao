@@ -17,6 +17,8 @@ import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemDesc;
 import com.taotao.pojo.TbItemExample;
 import com.taotao.service.ItemService;
+
+import cn.hutool.core.util.IdUtil;
 /**
  * 商品管理服务
  * @author MLOONG
@@ -66,6 +68,8 @@ public class ItemServiceImpl implements ItemService {
 	public TaoTaoResult addItem(TbItem item, String desc) {
 		//生成商品id(生成id的算法也仅仅只能写写测试案例，在生产中并发过大还是可能会造成id重复)
 		long itemId = IDUtils.genItemId();
+		//使用糊涂工具包的id生成类，详细参考https://hutool.cn/docs/#/core/工具类/唯一ID工具-IdUtil
+		//String uuid = IdUtil.randomUUID();
 		//补全item的属性
 		item.setId(itemId);
 		//商品状态:1-正常，2-下架，3-删除

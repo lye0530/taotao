@@ -21,7 +21,7 @@ import com.taotao.utils.FastDFSClient;
 public class PictureController {
 	
 	@Value("${IMAGE_SERVER_HOST}")
-	private String host;
+	private String HOST;
 	
 	@RequestMapping(value = "/pic/upload",method = RequestMethod.POST)
 	public Map<String, Object> picUpLoad(@RequestPart("uploadFile") MultipartFile uploadFile) {
@@ -34,7 +34,7 @@ public class PictureController {
 			//2.上传到图片服务器fastdfs
 			FastDFSClient fastDFSClient = new FastDFSClient("classpath:rs/client.conf");
 			String url = fastDFSClient.uploadFile(uploadFile.getBytes(), extName);
-			url = host+url;
+			url = HOST+url;
 			//3.响应上传图片的url
 			result.put("error", 0);
 			result.put("url", url);
