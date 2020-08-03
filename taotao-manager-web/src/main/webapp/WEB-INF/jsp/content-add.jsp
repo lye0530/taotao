@@ -56,28 +56,37 @@
 </div>
 <script type="text/javascript">
 	var contentAddEditor ;
+	//页面初始化完成后会调用的方法
 	$(function(){
+		//初始化富文本编辑器
 		contentAddEditor = TT.createEditor("#contentAddForm [name=content]");
+		//初始化单图片上传组件
 		TT.initOnePicUpload();
+		//拿到你在树形控件中选择的节点对象的id,将其赋值给隐藏域
 		$("#contentAddForm [name=categoryId]").val($("#contentCategoryTree").tree("getSelected").id);
 	});
 	
 	var contentAddPage  = {
+			//提交
 			submitForm : function (){
 				if(!$('#contentAddForm').form('validate')){
 					$.messager.alert('提示','表单还未填写完成!');
 					return ;
 				}
+				//富文本编辑器数据同步
 				contentAddEditor.sync();
 				
 				$.post("/content/save",$("#contentAddForm").serialize(), function(data){
 					if(data.status == 200){
 						$.messager.alert('提示','新增内容成功!');
+						//数据网格重新加载
     					$("#contentList").datagrid("reload");
+						//当前窗口关闭
     					TT.closeCurrentWindow();
 					}
 				});
 			},
+			//重置
 			clearForm : function(){
 				$('#contentAddForm').form('reset');
 				contentAddEditor.html('');

@@ -103,6 +103,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.taotao.pojo.TbContentCategory" >
+  	<!-- 新增数据后，获得自增主键，貌似还有其他方式，可以百度https://blog.51cto.com/xtceetg/1957557  -->
+  	<selectKey keyProperty="id" resultType="long" order="AFTER" >
+  		select LAST_INSERT_ID()
+  	</selectKey>
     insert into tb_content_category (id, parent_id, name, 
       status, sort_order, is_parent, 
       created, updated)
@@ -111,6 +115,10 @@
       #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.taotao.pojo.TbContentCategory" >
+  	<!-- 新增数据后，获得自增主键，貌似还有其他方式，可以百度https://blog.51cto.com/xtceetg/1957557  -->
+  	<selectKey keyProperty="id" resultType="long" order="AFTER" >
+  		select LAST_INSERT_ID()
+  	</selectKey>
     insert into tb_content_category
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

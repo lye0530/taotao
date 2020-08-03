@@ -128,6 +128,16 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  <!-- 根据id删除 -->
+  <delete id="deleteByIds">
+  	delete from tb_content 
+  	<where>
+  		id in
+  		<foreach collection="array" item="id" open="(" close=")" separator=",">
+  			#{id}
+  		</foreach>
+  	</where>
+  </delete>
   <insert id="insert" parameterType="com.taotao.pojo.TbContent" >
     insert into tb_content (id, category_id, title, 
       sub_title, title_desc, url, 
@@ -216,6 +226,10 @@
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
+  </select>
+  <!-- 根据categoryid获取数据列表  BaseResultMap -->
+  <select id="selectByCategoryId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+  	select	<include refid="Base_Column_List"/> from tb_content where category_id = #{categoryId,jdbcType=BIGINT}
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
     update tb_content

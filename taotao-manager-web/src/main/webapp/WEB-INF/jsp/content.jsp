@@ -29,8 +29,13 @@ $(function(){
 	var tree = $("#contentCategoryTree");
 	var datagrid = $("#contentList");
 	tree.tree({
+		//给内容分类管理树形控件绑定一个事件
 		onClick : function(node){
+			//debugger;
+			console.log(node)
+			//判断是否是叶子节点,如果是就重新加载数据网格控件的数据
 			if(tree.tree("isLeaf",node.target)){
+				$.messager.alert('提示','新增内容必须选择一个内容分类!');
 				datagrid.datagrid('reload', {
 					categoryId :node.id
 		        });
@@ -38,15 +43,19 @@ $(function(){
 		}
 	});
 });
+//定义数据网格控件中的工具栏
 var contentListToolbar = [{
     text:'新增',
     iconCls:'icon-add',
     handler:function(){
+    	//拿到你在树形控件中选择的节点对象
     	var node = $("#contentCategoryTree").tree("getSelected");
+    	//判断如果你没选中或者选中的不是叶子节点,给出提示,然后结束该方法调用
     	if(!node || !$("#contentCategoryTree").tree("isLeaf",node.target)){
     		$.messager.alert('提示','新增内容必须选择一个内容分类!');
     		return ;
     	}
+    	//如果选择的是叶子节点,跳出新增内容页面
     	TT.createWindow({
 			url : "/content-add"
 		}); 
@@ -55,6 +64,7 @@ var contentListToolbar = [{
     text:'编辑',
     iconCls:'icon-edit',
     handler:function(){
+    	//获取数据网格中选中数据列表的id
     	var ids = TT.getSelectionsIds("#contentList");
     	if(ids.length == 0){
     		$.messager.alert('提示','必须选择一个内容才能编辑!');
@@ -67,17 +77,19 @@ var contentListToolbar = [{
 		TT.createWindow({
 			url : "/content-edit",
 			onLoad : function(){
+				//获取当前选中数据列表中的第一个元素数据
 				var data = $("#contentList").datagrid("getSelections")[0];
+				//给编辑页面赋值,显示要修改的数据
 				$("#contentEditForm").form("load",data);
 				
-				// 实现图片
+				// 实现图片回显
 				if(data.pic){
 					$("#contentEditForm [name=pic]").after("<a href='"+data.pic+"' target='_blank'><img src='"+data.pic+"' width='80' height='50'/></a>");	
 				}
 				if(data.pic2){
 					$("#contentEditForm [name=pic2]").after("<a href='"+data.pic2+"' target='_blank'><img src='"+data.pic2+"' width='80' height='50'/></a>");					
 				}
-				
+				//初始化富文本编辑器内容,将要修改的数据回显出来
 				contentEditEditor.html(data.content);
 			}
 		});    	
@@ -86,12 +98,13 @@ var contentListToolbar = [{
     text:'删除',
     iconCls:'icon-cancel',
     handler:function(){
+    	//获取数据网格中选中数据列表的id
     	var ids = TT.getSelectionsIds("#contentList");
     	if(ids.length == 0){
     		$.messager.alert('提示','未选中商品!');
     		return ;
     	}
-    	$.messager.confirm('确认','确定删除ID为 '+ids+' 的内容吗？',function(r){
+    	$.messager.confirm('确认','确定删除ID为 '+ids+'的内容吗？',function(r){
     	    if (r){
     	    	var params = {"ids":ids};
             	$.post("/content/delete",params, function(data){

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+	
+	<!-- 配置数据库连接池 -->
+	<!-- 加载配置文件 -->
+	<context:property-placeholder location="classpath:properties/db.properties" />
+	<!-- 数据库连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		destroy-method="close">
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="maxActive" value="10" />
+		<property name="minIdle" value="5" />
+	</bean>
+	<!-- SqlSessionFactory -->
+	<!-- Mapper映射文件的包扫描器 -->
+	<!-- 让spring管理sqlsessionfactory 使用mybatis和spring整合包中的 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 数据库连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 加载mybatis的全局配置文件 -->
+		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml" />
+		<!-- 自动扫描mapping.xml文件,还可以在mybtis全局配置文件中配置扫描对应mapper的xml文件 ,或是在pom文件配置，当前方式聚合工程貌似不行，
+		可百度查找解决方案，个人猜想，把mapper对应的xml拿出来放到resources目录下应该可行，后续可自行测试 -->
+		<!--不使用这种方式扫描mapper映射文件，是因为是从当前目录下的com/taotao/mapper去查找，但是对应dao接口和mapper文件已经被单独打成了一个jar包，所以要使用下面那种方式  -->
+		<!-- <property name="mapperLocations" value="classpath:com/taotao/mapper/*.xml" /> -->
+	</bean>
+	<!-- Mapper映射文件的包扫描器 -->
+	<!--使用这种方式扫描mapper映射文件，是因为对应dao接口和mapper文件已经被单独打成了一个jar包，所以要使用下面的方式  -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.taotao.mapper" />
+	</bean>
+</beans>

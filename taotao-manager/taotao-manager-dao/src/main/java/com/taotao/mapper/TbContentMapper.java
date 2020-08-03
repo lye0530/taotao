@@ -11,6 +11,13 @@ public interface TbContentMapper {
     int deleteByExample(TbContentExample example);
 
     int deleteByPrimaryKey(Long id);
+    
+    /**
+     * 根据id删除
+     * @param ids
+     * @return
+     */
+    int deleteByIds(String[] ids);
 
     int insert(TbContent record);
 
@@ -19,6 +26,13 @@ public interface TbContentMapper {
     List<TbContent> selectByExampleWithBLOBs(TbContentExample example);
 
     List<TbContent> selectByExample(TbContentExample example);
+    
+    /**
+     * 	根据categoryid获取数据列表
+     * @param id
+     * @return
+     */
+    List<TbContent> selectByCategoryId(Long categoryId);
 
     TbContent selectByPrimaryKey(Long id);
 

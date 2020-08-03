@@ -222,6 +222,9 @@ var TT = TAOTAO = {
 			  }
 		  });
     },
+    /**
+     * 获取数据网格中选中数据列表的id
+     */
     getSelectionsIds : function (select){
     	var list = $(select);
     	var sels = list.datagrid("getSelections");

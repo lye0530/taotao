@@ -42,9 +42,15 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 		</dependency>
+		<!-- maven编译问题 -->
+		<!-- <dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.2</version>
+		</dependency> -->
 	</dependencies>
 	<!-- 配置读取对应mapper的xml文件，还可在还可以在mybtis全局配置文件配置或在spring配置文件中的sqlSessionFactory中配置 -->
-	<!-- 聚合工程貌似不能在mybtis全局配置文件或spring配置文件中的sqlSessionFactory中配置，可百度查找解决方案，个人猜想，把mapper对应的xml拿出来放到resources目录下应该可行，后续可自行测试  -->
+	<!-- 聚合工程貌似不能在mybtis全局配置文件或spring配置文件中的sqlSessionFactory中配置，可百度查找解决方案，个人猜想，把mapper对应的xml拿出来放到resources目录下应该可行，后续可自行测试 -->
 	<!-- 该方式经测试可以成功找对应mapper的xml文件 -->
 	<build>
 		<resources>
@@ -54,7 +60,7 @@
 					<include>**/*.xml</include>
 				</includes>
 			</resource>
-			 <resource>
+			<resource>
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>**/*.xml</include>

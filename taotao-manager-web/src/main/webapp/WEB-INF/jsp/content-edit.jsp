@@ -52,31 +52,38 @@
 	</div>
 </div>
 <script type="text/javascript">
-var contentEditEditor ;
-$(function(){
-	contentEditEditor = TT.createEditor("#contentEditForm [name=content]");
-	TT.initOnePicUpload();
-});
-
-var contentEditPage = {
-		submitForm : function(){
-			if(!$('#contentEditForm').form('validate')){
-				$.messager.alert('提示','表单还未填写完成!');
-				return ;
-			}
-			contentEditEditor.sync();
-			
-			$.post("/rest/content/edit",$("#contentEditForm").serialize(), function(data){
-				if(data.status == 200){
-					$.messager.alert('提示','新增内容成功!');
-					$("#contentList").datagrid("reload");
-					TT.closeCurrentWindow();
+	var contentEditEditor ;
+	//页面初始化完成后会调用的方法
+	$(function(){
+		//初始化富文本编辑器
+		contentEditEditor = TT.createEditor("#contentEditForm [name=content]");
+		//初始化单图片上传组件
+		TT.initOnePicUpload();
+	});
+	
+	var contentEditPage = {
+			//提交
+			submitForm : function(){
+				if(!$('#contentEditForm').form('validate')){
+					$.messager.alert('提示','表单还未填写完成!');
+					return ;
 				}
-			});
-		},
-		clearForm : function(){
-			
-		}
-};
+				//富文本编辑器数据同步
+				contentEditEditor.sync();
+				
+				$.post("/rest/content/edit",$("#contentEditForm").serialize(), function(data){
+					if(data.status == 200){
+						$.messager.alert('提示','新增内容成功!');
+						$("#contentList").datagrid("reload");
+						TT.closeCurrentWindow();
+					}
+				});
+			},
+			//重置
+			clearForm : function(){
+				$('#contentAddForm').form('reset');
+				contentAddEditor.html('');
+			}
+	};
 
 </script>
