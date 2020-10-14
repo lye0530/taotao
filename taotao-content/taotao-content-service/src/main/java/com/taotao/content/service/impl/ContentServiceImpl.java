@@ -42,32 +42,6 @@ public class ContentServiceImpl implements ContentService {
 		return TaoTaoResult.ok();
 	}
 
-	/**
-	 *	有问题代码
-	 */
-	//@Override
-	public DataResult<TbContent> getContentList111(int page, int rows,long categoryId) {
-		//设置分页信息
-		PageHelper.startPage(page, rows);
-		//构成查询条件
-		TbContentExample example = new TbContentExample();
-		Criteria criteria = example.createCriteria();
-		//设置categoryId
-		//criteria.andCategoryIdEqualTo(categoryId);
-		//criteria.andIdIn(values);
-		
-		//根据内容分类id获取数据
-		List<TbContent> list = contentMapper.selectByExample(example);
-		//获取查询结果
-		PageInfo<TbContent> info = new PageInfo<>(list);
-		//构建返回对象
-		DataResult<TbContent> dResult = new DataResult<>();
-		dResult.setTotal(info.getTotal());
-		dResult.setRows(list);
-		return dResult;
-	}
-	
-	
 	@Override
 	public DataResult<TbContent> getContentList(int page, int rows,long categoryId) {
 		//设置分页信息
@@ -88,7 +62,7 @@ public class ContentServiceImpl implements ContentService {
 	}
 
 	/**
-	 * 	仅仅限于测试
+	 * 	仅仅限于测试,使用Criteria有问题
 	 */
 	@Override
 	public DataResult<TbContent> getContentList(long categoryId) {
@@ -105,7 +79,16 @@ public class ContentServiceImpl implements ContentService {
 		dResult.setRows(list);
 		return dResult;
 	}
-
+	
+	@Override
+	public List<TbContent> getContentByCid(long cid) {
+		TbContentExample example = new TbContentExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andCategoryIdEqualTo(cid);
+		List<TbContent> list = contentMapper.selectByExample(example);
+		return list;
+	}
+	
 	@Override
 	public TaoTaoResult updateContent(TbContent content) {
 		contentMapper.updateByPrimaryKey(content);

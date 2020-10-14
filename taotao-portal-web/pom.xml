@@ -23,6 +23,12 @@
 			<artifactId>taotao-manager-pojo</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<!-- 添加对content-interface模块的依赖 -->
+		<dependency>
+			<groupId>com.taotao</groupId>
+			<artifactId>taotao-content-interface</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<!-- 先注释看不引用interface模块时，调用dubbo服务会不会报错 -->
 		<dependency>
 			<groupId>com.taotao</groupId>

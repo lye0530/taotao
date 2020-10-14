@@ -27,4 +27,5 @@
 	<dubbo:registry protocol="zookeeper" address="192.168.131.135:2181"/>	
 	<!-- 声明要调用的服务，该标签只有服务消费者才可使用 -->
 	<!-- <dubbo:reference interface="com.taotao.service.ItemService" id="itemService" /> -->
+	<dubbo:reference interface="com.taotao.content.service.ContentService" id="contentServiceImpl" />
 </beans>      
